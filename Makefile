@@ -135,6 +135,7 @@ $O/LOCALEMobility.o: LOCALEMobility.cc \
 	$(MIXIM_PROJ)/src/inet_stub/base/NotificationBoard.h \
 	$(MIXIM_PROJ)/src/inet_stub/base/NotifierConsts.h \
 	$(MIXIM_PROJ)/src/inet_stub/mobility/IMobility.h \
+	$(MIXIM_PROJ)/src/inet_stub/mobility/models/LineSegmentsMobilityBase.h \
 	$(MIXIM_PROJ)/src/inet_stub/mobility/models/MobilityBase.h \
 	$(MIXIM_PROJ)/src/inet_stub/mobility/models/MovingMobilityBase.h \
 	$(MIXIM_PROJ)/src/inet_stub/util/FWMath.h
