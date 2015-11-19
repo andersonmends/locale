@@ -112,18 +112,35 @@ void LOCALEMobility::initialize(int stage) {
 void LOCALEMobility::setTargetPosition() {
 
     cModule* module = this->getParentModule();
+    if (module->hasGate("out9-1")) {
+        cout << "Tem gate" << "\n\n";
+        cModule* c = module->gate("out9-1")->getNextGate()->getOwnerModule();
 
-    for (cModule::GateIterator i(module); !i.end(); i++) {
-        cGate *gate = i();
-//        cGate* g = gate->getNextGate();
-//        cGate* e = gate->getPreviousGate();
-        cModule *neighbour = gate->getNextGate()->getOwnerModule();
-//           cout << gate->getFullName() << "\n";
-        cout << this->getFullPath() << "\n";
-//        int t = neighbour->getId();
-//        cout << t << "\n";
+        cout << module->getFullPath() << "\n";
+        cout << getFullPath() << "\n";
+       cModule* d = c->getSubmodule("mobility");
+       double r = d->par("angle");
+       cout << r << "\n\n";
 
+    } else {
+        cout << "Não tem gate" << "\n\n";
     }
+//    cModule* c = module->gate("out9-1")->getPathEndGate()->getOwnerModule();
+//    cModule* b = module->gate("out9-1")->getPathStartGate()->getOwnerModule();
+//    cout << module->getFullPath() << "\n";
+//    cout << b->getFullPath() << "\n";
+//    cout << module->gate(0)->getFullPath() << "\n\n";
+//    for (cModule::GateIterator i(module); !i.end(); i++) {
+//        cGate *gate = i();
+////        cGate* g = gate->getNextGate();
+////        cGate* e = gate->getPreviousGate();
+//        cModule *neighbour = gate->getNextGate()->getOwnerModule();
+////           cout << gate->getFullName() << "\n";
+//        cout << this->getFullPath() << "\n";
+//
+//        cout << neighbour->getFullPath() << "\n";
+//
+//    }
 
 //    Coord dummy;
 //    angle = angle + 10;;
