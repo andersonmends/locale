@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for LOCALE
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -O out -IC:/Users/Anderson/workspace/omnet/MiXiM/src/inet_stub/mobility -IC:/Users/Anderson/workspace/omnet/MiXiM/src/inet_stub/util -IC:/Users/Anderson/workspace/omnet/MiXiM/src/inet_stub/base -IC:/Users/Anderson/workspace/omnet/MiXiM/src/inet_stub/mobility/models -LC:/Users/Anderson/workspace/omnet/MiXiM/out/$$\(CONFIGNAME\)/src -lmixim -KMIXIM_PROJ=C:/Users/Anderson/workspace/omnet/MiXiM
+#  opp_makemake -f --deep -O out -I../MiXiM/src/inet_stub/mobility -I../MiXiM/src/inet_stub/util -I../MiXiM/src/inet_stub/base -I../MiXiM/src/inet_stub/mobility/models -L../MiXiM/out/$$\(CONFIGNAME\)/src -lmixim -KMIXIM_PROJ=../MiXiM
 #
 
 # Name of target to be created (-o option)
@@ -15,10 +15,10 @@ USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
 
 # C++ include paths (with -I)
 INCLUDE_PATH = \
-    -I$(MIXIM_PROJ)/src/inet_stub/mobility \
-    -I$(MIXIM_PROJ)/src/inet_stub/util \
-    -I$(MIXIM_PROJ)/src/inet_stub/base \
-    -I$(MIXIM_PROJ)/src/inet_stub/mobility/models \
+    -I../MiXiM/src/inet_stub/mobility \
+    -I../MiXiM/src/inet_stub/util \
+    -I../MiXiM/src/inet_stub/base \
+    -I../MiXiM/src/inet_stub/mobility/models \
     -I. \
     -Iresults
 
@@ -26,8 +26,8 @@ INCLUDE_PATH = \
 EXTRA_OBJS =
 
 # Additional libraries (-L, -l options)
-LIBS = -L$(MIXIM_PROJ)/out/$(CONFIGNAME)/src  -lmixim
-LIBS += -Wl,-rpath,`abspath $(MIXIM_PROJ)/out/$(CONFIGNAME)/src`
+LIBS = -L../MiXiM/out/$(CONFIGNAME)/src  -lmixim
+LIBS += -Wl,-rpath,`abspath ../MiXiM/out/$(CONFIGNAME)/src`
 
 # Output directory
 PROJECT_OUTPUT_DIR = out
@@ -41,7 +41,7 @@ OBJS = $O/LOCALEMobility.o
 MSGFILES =
 
 # Other makefile variables (-K)
-MIXIM_PROJ=C:/Users/Anderson/workspace/omnet/MiXiM
+MIXIM_PROJ=../MiXiM
 
 #------------------------------------------------------------------------------
 

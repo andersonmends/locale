@@ -113,50 +113,88 @@ void LOCALEMobility::setTargetPosition() {
 
     cModule* module = this->getParentModule();
     if (module->hasGate("out9-1")) {
-        cout << "Tem gate" << "\n\n";
-        cModule* c = module->gate("out9-1")->getNextGate()->getOwnerModule();
-
-        cout << module->getFullPath() << "\n";
-        cout << getFullPath() << "\n";
-       cModule* d = c->getSubmodule("mobility");
-       double r = d->par("angle");
-       cout << r << "\n\n";
+//        targetPosition = getRandomPosition();
+//           Coord positionDelta = targetPosition - lastPosition;
+//           double distance = positionDelta.length();
+//           nextChange = simTime() + distance / speed;
 
     } else {
-        cout << "Não tem gate" << "\n\n";
+
     }
-//    cModule* c = module->gate("out9-1")->getPathEndGate()->getOwnerModule();
-//    cModule* b = module->gate("out9-1")->getPathStartGate()->getOwnerModule();
-//    cout << module->getFullPath() << "\n";
-//    cout << b->getFullPath() << "\n";
-//    cout << module->gate(0)->getFullPath() << "\n\n";
+
+    if (module->hasGate("out9-2")) {
+
+
+    } else {
+
+    }
+
+    if (module->hasGate("out16-1")) {
+        cModule* neighbor =
+                module->gate("out16-1")->getNextGate()->getOwnerModule();
+        cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+        cout << "Módulo " << module->getFullPath() << "está com "
+                << submoduleMobility->getFullPath() << " como vizinho" << "\n";
+
+    } else {
+        cout << "Módulo " << module->getFullName() << "está sem vizinhos"
+                << "\n";
+    }
+
+    if (module->hasGate("out16-2")) {
+        cModule* neighbor =
+                module->gate("out16-2")->getNextGate()->getOwnerModule();
+        cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+        cout << "Módulo " << module->getFullPath() << "está com "
+                << submoduleMobility->getFullPath() << " como vizinho" << "\n";
+
+    } else {
+        cout << "Módulo " << module->getFullName() << "está sem vizinhos"
+                << "\n";
+    }
+
+    if (module->hasGate("out23-1")) {
+        cModule* neighbor =
+                module->gate("out23-1")->getNextGate()->getOwnerModule();
+        cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+        cout << "Módulo " << module->getFullPath() << "está com "
+                << submoduleMobility->getFullPath() << " como vizinho" << "\n";
+
+    } else {
+        cout << "Módulo " << module->getFullName() << "está sem vizinhos"
+                << "\n";
+    }
+
+    if (module->hasGate("out23-2")) {
+        cModule* neighbor =
+                module->gate("out23-2")->getNextGate()->getOwnerModule();
+        cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+        cout << "Módulo " << module->getFullPath() << "está com "
+                << submoduleMobility->getFullPath() << " como vizinho" << "\n";
+
+    } else {
+        cout << "Módulo " << module->getFullName() << "está sem vizinhos"
+                << "\n";
+    }
+
+    targetPosition = getRandomPosition();
+               Coord positionDelta = targetPosition - lastPosition;
+               double distance = positionDelta.length();
+               nextChange = simTime() + distance / speed;
+
+    cout << "\n";
+
+//    // Está dando problema quando tenta acessar algum parametro do submodule
 //    for (cModule::GateIterator i(module); !i.end(); i++) {
 //        cGate *gate = i();
-////        cGate* g = gate->getNextGate();
-////        cGate* e = gate->getPreviousGate();
-//        cModule *neighbour = gate->getNextGate()->getOwnerModule();
-////           cout << gate->getFullName() << "\n";
-//        cout << this->getFullPath() << "\n";
 //
-//        cout << neighbour->getFullPath() << "\n";
+//        cModule* neighbor = gate->getPathEndGate()->getOwnerModule();
+//        cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+//        cout << "Módulo " << module->getFullPath() << "está com "
+//                << submoduleMobility->getFullPath() << " como vizinho" << "\n";
 //
 //    }
 
-//    Coord dummy;
-//    angle = angle + 10;;
-//    cout << this->getFullPath() << "\n";
-////  cout << x << "\n";
-//    cout << lastPosition << "\n";
-//    cout << "" << "\n";
-//
-    targetPosition = getRandomPosition();
-    Coord positionDelta = targetPosition - lastPosition;
-    double distance = positionDelta.length();
-    nextChange = simTime() + distance / speed;
-//
-//
-//    cout <<this->getFullPath() << " new target set. distance=" << distance << " xpos= "
-//              << targetPosition.x << " ypos=" << targetPosition.y
-//              << " nextChange=" << nextChange << "\n\n";
+
 }
 
