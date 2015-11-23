@@ -98,6 +98,7 @@ LOCALEMobility::LOCALEMobility() {
     speed = 0;
     angle = 0;
     acceleration = 0;
+    posicaoAnterior = Coord(0,0);
 }
 
 void LOCALEMobility::initialize(int stage) {
@@ -113,20 +114,28 @@ void LOCALEMobility::setTargetPosition() {
 
     cModule* module = this->getParentModule();
     if (module->hasGate("out9-1")) {
-//        targetPosition = getRandomPosition();
-//           Coord positionDelta = targetPosition - lastPosition;
-//           double distance = positionDelta.length();
-//           nextChange = simTime() + distance / speed;
+        cModule* neighbor =
+                module->gate("out9-1")->getNextGate()->getOwnerModule();
+        cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+        cout << "Módulo " << module->getFullPath() << "está com "
+                << submoduleMobility->getFullPath() << " como vizinho" << "\n";
+
+
 
     } else {
-
+        cout << "Módulo " << module->getFullName() << "está sem vizinhos"
+                << "\n";
     }
 
     if (module->hasGate("out9-2")) {
-
-
+        cModule* neighbor =
+                module->gate("out9-2")->getNextGate()->getOwnerModule();
+        cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+        cout << "Módulo " << module->getFullPath() << "está com "
+                << submoduleMobility->getFullPath() << " como vizinho" << "\n";
     } else {
-
+        cout << "Módulo " << module->getFullName() << "está sem vizinhos"
+                << "\n";
     }
 
     if (module->hasGate("out16-1")) {
@@ -177,23 +186,34 @@ void LOCALEMobility::setTargetPosition() {
                 << "\n";
     }
 
-    targetPosition = getRandomPosition();
-               Coord positionDelta = targetPosition - lastPosition;
-               double distance = positionDelta.length();
-               nextChange = simTime() + distance / speed;
+    // Está dando problema quando tenta acessar algum parametro do submodule
+//        for (cModule::GateIterator i(module); !i.end(); i++) {
+//            cGate *gate = i();
+//
+//            cModule* neighbor = gate->getPathEndGate()->getOwnerModule();
+//            cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+//
+////            cout << "Módulo " << module->getFullPath() << "está com "
+////                    << submoduleMobility->getFullPath() << " como vizinho" << "\n";
+//
+//        }
+
+    if (strcmp(module->getFullName(), "node[1]") == 0) {
+        targetPosition = getRandomPosition();
+        posicaoAnterior = targetPosition;
+        Coord positionDelta = targetPosition - lastPosition;
+        double distance = positionDelta.length();
+        nextChange = simTime() + distance / speed;
+        cout << posicaoAnterior <<"\n";
+    } else {
+        cout << posicaoAnterior <<"\n";
+        targetPosition = getRandomPosition();
+        Coord positionDelta = targetPosition - lastPosition;
+        double distance = positionDelta.length();
+        nextChange = simTime() + distance / speed;
+    }
 
     cout << "\n";
-
-//    // Está dando problema quando tenta acessar algum parametro do submodule
-//    for (cModule::GateIterator i(module); !i.end(); i++) {
-//        cGate *gate = i();
-//
-//        cModule* neighbor = gate->getPathEndGate()->getOwnerModule();
-//        cModule* submoduleMobility = neighbor->getSubmodule("mobility");
-//        cout << "Módulo " << module->getFullPath() << "está com "
-//                << submoduleMobility->getFullPath() << " como vizinho" << "\n";
-//
-//    }
 
 
 }

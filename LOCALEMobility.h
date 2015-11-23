@@ -45,6 +45,7 @@ protected:
     double speed;          ///< speed of the host
     double angle;          ///< angle of linear motion
     double acceleration;
+    Coord posicaoAnterior;
 
 protected:
     /** @brief Initializes mobility model parameters. */
