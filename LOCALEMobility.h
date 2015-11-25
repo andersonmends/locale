@@ -41,11 +41,13 @@
  */
 class INET_API LOCALEMobility: public LineSegmentsMobilityBase {
 protected:
-    /** @brief Speed parameter. */
-    double speed;          ///< speed of the host
-    double angle;          ///< angle of linear motion
-    double acceleration;
-    Coord posicaoAnterior;
+
+    double velocidade;
+    double posicaoRealX;
+    double posicaoRealY;
+    double posicaoEstimadaX;
+    double posicaoEstimadaY;
+    int iniciador;
 
 protected:
     /** @brief Initializes mobility model parameters. */

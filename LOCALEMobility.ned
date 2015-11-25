@@ -12,9 +12,11 @@ simple LOCALEMobility extends MovingMobilityBase
         double initialX @unit(m) = default(uniform(this.constraintAreaMinX, this.constraintAreaMaxX));
         double initialY @unit(m) = default(uniform(this.constraintAreaMinY, this.constraintAreaMaxY));
         double initialZ @unit(m) = default(uniform(this.constraintAreaMinZ, this.constraintAreaMaxZ));
+        double posicaoRealX @unit(m) = default(0);
+        double posicaoRealY @unit(m) = default(0);
+        double posicaoEstimadaX @unit(m) = default(0);
+        double posicaoEstimadaY @unit(m) = default(0);
         bool initFromDisplayString = default(true);
-        double speed @unit(mps) = default(0mps); // speed of the host
-        double angle @unit(deg) = default(uniform(0deg, 360deg)); // angle of linear motion
-        double acceleration = default(0); // acceleration of linear motion (m/s2)
+        double velocidade @unit(mps) = default(0mps); 
         @class(LOCALEMobility); // define a classe que implementará a lógica do módulo
 }
