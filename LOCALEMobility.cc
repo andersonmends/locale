@@ -201,40 +201,47 @@ void LOCALEMobility::setTargetPosition() {
 
     if (strcmp(module->getFullName(), "node[0]") == 0) {
 
-        if (iniciador == 0) {
-            posicaoEstimadaX = lastPosition.x;
-            posicaoEstimadaY = lastPosition.y;
-            iniciador++;
-        }
+//        if (iniciador == 0) {
+//            posicaoEstimadaX = lastPosition.x;
+//            posicaoEstimadaY = lastPosition.y;
+//            iniciador++;
+//        }
         targetPosition = getRandomPosition();
-        Coord positionDelta = targetPosition - lastPosition;
-        double distance = positionDelta.length();
-        nextChange = simTime() + distance / velocidade;
+        double distancia = lastPosition.distance(targetPosition);
+        nextChange = simTime() + distancia / velocidade;
 //        posicaoRealX = lastPosition.x;
         cout << module->getFullName() << "\n";
-        cout << lastPosition.x << "\n";
-        cout << posicaoRealX << "\n";
-        cout << targetPosition.x << "\n";
+        cout << "d: " << distancia << "\n";
+        cout << "x ulti: " << lastPosition.x << "\n";
+        cout << "x prox: " << targetPosition.x << "\n";
+        cout << "y prox: " << lastPosition.y << "\n";
+        cout << "y prox: " << targetPosition.y << "\n";
 
     }
     if (strcmp(module->getFullName(), "node[1]") == 0) {
         targetPosition = getRandomPosition();
         Coord positionDelta = targetPosition - lastPosition;
-        double distance = positionDelta.length();
-        nextChange = simTime() + distance / velocidade;
+        double distancia = positionDelta.length();
+        nextChange = simTime() + distancia / velocidade;
         cout << module->getFullName() << "\n";
-        cout << lastPosition << "\n";
-        cout << targetPosition << "\n";
+        cout << "d: " << distancia << "\n";
+        cout << "x ulti: " << lastPosition.x << "\n";
+        cout << "x prox: " << targetPosition.x << "\n";
+        cout << "y prox: " << lastPosition.y << "\n";
+        cout << "y prox: " << targetPosition.y << "\n";
 
     }
     if (strcmp(module->getFullName(), "node[2]") == 0) {
         targetPosition = getRandomPosition();
         Coord positionDelta = targetPosition - lastPosition;
-        double distance = positionDelta.length();
-        nextChange = simTime() + distance / velocidade;
+        double distancia = positionDelta.length();
+        nextChange = simTime() + distancia / velocidade;
         cout << module->getFullName() << "\n";
-        cout << lastPosition << "\n";
-        cout << targetPosition << "\n";
+        cout << "d: " << distancia << "\n";
+        cout << "x ulti: " << lastPosition.x << "\n";
+        cout << "x prox: " << targetPosition.x << "\n";
+        cout << "y prox: " << lastPosition.y << "\n";
+        cout << "y prox: " << targetPosition.y << "\n";
 
     }
 
