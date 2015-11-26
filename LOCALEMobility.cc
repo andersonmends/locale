@@ -206,7 +206,14 @@ void LOCALEMobility::setTargetPosition() {
 //            posicaoEstimadaY = lastPosition.y;
 //            iniciador++;
 //        }
+
+
+
+        posicaoEstimadaX = lastPosition.x;
+        posicaoEstimadaY = lastPosition.y;
+
         targetPosition = getRandomPosition();
+        targetPosition.z = 0;
         double distancia = lastPosition.distance(targetPosition);
         nextChange = simTime() + distancia / velocidade;
 //        posicaoRealX = lastPosition.x;
@@ -214,7 +221,7 @@ void LOCALEMobility::setTargetPosition() {
         cout << "d: " << distancia << "\n";
         cout << "x ulti: " << lastPosition.x << "\n";
         cout << "x prox: " << targetPosition.x << "\n";
-        cout << "y prox: " << lastPosition.y << "\n";
+        cout << "y ulti: " << lastPosition.y << "\n";
         cout << "y prox: " << targetPosition.y << "\n";
 
     }
@@ -227,7 +234,7 @@ void LOCALEMobility::setTargetPosition() {
         cout << "d: " << distancia << "\n";
         cout << "x ulti: " << lastPosition.x << "\n";
         cout << "x prox: " << targetPosition.x << "\n";
-        cout << "y prox: " << lastPosition.y << "\n";
+        cout << "y ulti: " << lastPosition.y << "\n";
         cout << "y prox: " << targetPosition.y << "\n";
 
     }
@@ -240,7 +247,7 @@ void LOCALEMobility::setTargetPosition() {
         cout << "d: " << distancia << "\n";
         cout << "x ulti: " << lastPosition.x << "\n";
         cout << "x prox: " << targetPosition.x << "\n";
-        cout << "y prox: " << lastPosition.y << "\n";
+        cout << "y ulti: " << lastPosition.y << "\n";
         cout << "y prox: " << targetPosition.y << "\n";
 
     }
