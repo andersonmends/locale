@@ -89,6 +89,7 @@
 #include "FWMath.h"
 #include <iostream>
 #include <string>
+#include <cmath>
 
 using namespace std;
 
@@ -101,6 +102,7 @@ LOCALEMobility::LOCALEMobility() {
     posicaoEstimadaX = 0;
     posicaoEstimadaY = 0;
     iniciador = 0;
+    precisao = 0;
 }
 
 void LOCALEMobility::initialize(int stage) {
@@ -116,28 +118,7 @@ void LOCALEMobility::initialize(int stage) {
 void LOCALEMobility::setTargetPosition() {
 
     cModule* module = this->getParentModule();
-//    if (module->hasGate("out9-1")) {
-//        cModule* neighbor =
-//                module->gate("out9-1")->getNextGate()->getOwnerModule();
-//        cModule* submoduleMobility = neighbor->getSubmodule("mobility");
-//        cout << "Módulo " << module->getFullPath() << "está com "
-//                << submoduleMobility->getFullPath() << " como vizinho" << "\n";
 //
-//    } else {
-//        cout << "Módulo " << module->getFullName() << "está sem vizinhos"
-//                << "\n";
-//    }
-//
-//    if (module->hasGate("out9-2")) {
-//        cModule* neighbor =
-//                module->gate("out9-2")->getNextGate()->getOwnerModule();
-//        cModule* submoduleMobility = neighbor->getSubmodule("mobility");
-//        cout << "Módulo " << module->getFullPath() << "está com "
-//                << submoduleMobility->getFullPath() << " como vizinho" << "\n";
-//    } else {
-//        cout << "Módulo " << module->getFullName() << "está sem vizinhos"
-//                << "\n";
-//    }
 //
 //    if (module->hasGate("out16-1")) {
 //        cModule* neighbor =
@@ -201,54 +182,109 @@ void LOCALEMobility::setTargetPosition() {
 
     if (strcmp(module->getFullName(), "node[0]") == 0) {
 
-//        if (iniciador == 0) {
-//            posicaoEstimadaX = lastPosition.x;
-//            posicaoEstimadaY = lastPosition.y;
-//            iniciador++;
-//        }
+        if (module->hasGate("out9-1")) {
+            cModule* neighbor =
+                    module->gate("out9-1")->getNextGate()->getOwnerModule();
+            cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+            cout << "Módulo " << module->getFullPath() << "está com "
+                    << submoduleMobility->getFullPath() << " como vizinho"
+                    << "\n";
+             submoduleMobility->par("precisao").setDoubleValue(30);
+             double s = submoduleMobility->par("precisao");
+            cout << "precisão do vizinho: " << s << "\n";
 
+        } else {
+            cout << "Módulo " << module->getFullName() << "está sem vizinhos"
+                    << "\n";
+        }
 
-
-        posicaoEstimadaX = lastPosition.x;
-        posicaoEstimadaY = lastPosition.y;
+        if (module->hasGate("out9-2")) {
+            cModule* neighbor =
+                    module->gate("out9-2")->getNextGate()->getOwnerModule();
+            cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+            cout << "Módulo " << module->getFullPath() << "está com "
+                    << submoduleMobility->getFullPath() << " como vizinho"
+                    << "\n";
+            double s = submoduleMobility->par("precisao");
+            cout << "precisão do vizinho: " << s << "\n";
+        } else {
+            cout << "Módulo " << module->getFullName() << "está sem vizinhos"
+                    << "\n";
+        }
 
         targetPosition = getRandomPosition();
         targetPosition.z = 0;
         double distancia = lastPosition.distance(targetPosition);
         nextChange = simTime() + distancia / velocidade;
-//        posicaoRealX = lastPosition.x;
+
+        estimarPosition(distancia);
+
         cout << module->getFullName() << "\n";
-        cout << "d: " << distancia << "\n";
-        cout << "x ulti: " << lastPosition.x << "\n";
-        cout << "x prox: " << targetPosition.x << "\n";
-        cout << "y ulti: " << lastPosition.y << "\n";
-        cout << "y prox: " << targetPosition.y << "\n";
+        cout << "Posição real: x " << targetPosition.x << " y "
+                << targetPosition.y << "\n";
+        cout << "Posição estimada: x " << posicaoEstimadaX << " y "
+                << posicaoEstimadaY << "\n";
+        calcularPrecisao();
 
     }
-    if (strcmp(module->getFullName(), "node[1]") == 0) {
-        targetPosition = getRandomPosition();
-        Coord positionDelta = targetPosition - lastPosition;
-        double distancia = positionDelta.length();
-        nextChange = simTime() + distancia / velocidade;
-        cout << module->getFullName() << "\n";
-        cout << "d: " << distancia << "\n";
-        cout << "x ulti: " << lastPosition.x << "\n";
-        cout << "x prox: " << targetPosition.x << "\n";
-        cout << "y ulti: " << lastPosition.y << "\n";
-        cout << "y prox: " << targetPosition.y << "\n";
 
+    if (strcmp(module->getFullName(), "node[1]") == 0) {
+
+        if (module->hasGate("out16-1")) {
+               cModule* neighbor =
+                       module->gate("out16-1")->getNextGate()->getOwnerModule();
+               cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+               cout << "Módulo " << module->getFullPath() << "está com "
+                       << submoduleMobility->getFullPath() << " como vizinho" << "\n";
+               double s = submoduleMobility->par("precisao");
+                          cout << "precisão do vizinho: " << s << "\n";
+
+           } else {
+               cout << "Módulo " << module->getFullName() << "está sem vizinhos"
+                       << "\n";
+           }
+
+           if (module->hasGate("out16-2")) {
+               cModule* neighbor =
+                       module->gate("out16-2")->getNextGate()->getOwnerModule();
+               cModule* submoduleMobility = neighbor->getSubmodule("mobility");
+               cout << "Módulo " << module->getFullPath() << "está com "
+                       << submoduleMobility->getFullPath() << " como vizinho" << "\n";
+
+
+           } else {
+               cout << "Módulo " << module->getFullName() << "está sem vizinhos"
+                       << "\n";
+           }
+
+        targetPosition = getRandomPosition();
+        targetPosition.z = 0;
+        double distancia = lastPosition.distance(targetPosition);
+        nextChange = simTime() + distancia / velocidade;
+
+        estimarPosition(distancia);
+
+        cout << module->getFullName() << "\n";
+        cout << "Posição real: x " << targetPosition.x << " y "
+                << targetPosition.y << "\n";
+        cout << "Posição estimada: x " << posicaoEstimadaX << " y "
+                << posicaoEstimadaY << "\n";
+        calcularPrecisao();
     }
     if (strcmp(module->getFullName(), "node[2]") == 0) {
         targetPosition = getRandomPosition();
-        Coord positionDelta = targetPosition - lastPosition;
-        double distancia = positionDelta.length();
+        targetPosition.z = 0;
+        double distancia = lastPosition.distance(targetPosition);
         nextChange = simTime() + distancia / velocidade;
+
+        estimarPosition(distancia);
+
         cout << module->getFullName() << "\n";
-        cout << "d: " << distancia << "\n";
-        cout << "x ulti: " << lastPosition.x << "\n";
-        cout << "x prox: " << targetPosition.x << "\n";
-        cout << "y ulti: " << lastPosition.y << "\n";
-        cout << "y prox: " << targetPosition.y << "\n";
+        cout << "Posição real: x " << targetPosition.x << " y "
+                << targetPosition.y << "\n";
+        cout << "Posição estimada: x " << posicaoEstimadaX << " y "
+                << posicaoEstimadaY << "\n";
+        calcularPrecisao();
 
     }
 
@@ -256,3 +292,31 @@ void LOCALEMobility::setTargetPosition() {
 
 }
 
+void LOCALEMobility::estimarPosition(double distancia) {
+    if (lastPosition.x < targetPosition.x) {
+        posicaoEstimadaX = (distancia + (velocidade * velocidade)) / 2
+                + lastPosition.x;
+    } else {
+        posicaoEstimadaX = abs(
+                (distancia + (velocidade * velocidade * 3)) / 2
+                        - lastPosition.x);
+
+    }
+
+    if (lastPosition.y < targetPosition.y) {
+        posicaoEstimadaY = ((targetPosition.y - lastPosition.y)
+                + (velocidade * velocidade)) + distancia;
+    } else {
+        posicaoEstimadaY = abs(distancia - lastPosition.y);
+
+    }
+
+}
+
+void LOCALEMobility::calcularPrecisao() {
+
+    // double precisao = abs(((posicaoEstimadaX - targetPosition.x)/targetPosition.x)*100);
+    precisao = 100 - abs(((posicaoEstimadaX - targetPosition.x) / (double) targetPosition.x) * 100);
+    par("precisao").setDoubleValue(precisao);
+    cout << precisao << "\n";
+}

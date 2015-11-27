@@ -16,6 +16,7 @@ simple LOCALEMobility extends MovingMobilityBase
         double posicaoRealY @unit(m) = default(0);
         double posicaoEstimadaX @unit(m) = default(0);
         double posicaoEstimadaY @unit(m) = default(0);
+        double precisao = default(0);
         bool initFromDisplayString = default(true);
         double velocidade @unit(mps) = default(0mps); 
         @class(LOCALEMobility); // define a classe que implementará a lógica do módulo
