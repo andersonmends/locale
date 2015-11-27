@@ -58,10 +58,12 @@ protected:
     virtual void setTargetPosition();
 
     /** método para calcular a estimativa do nó através de algoritmo de deadreckning*/
-    virtual void estimarPosition(double distancia);
+    virtual void localPhase(double distancia);
 
     /** método para calcular a precisão da estimativa*/
-       virtual void calcularPrecisao();
+    virtual void calcularPrecisao();
+
+    virtual void mergePhase();
 
 public:
     LOCALEMobility();
