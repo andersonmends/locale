@@ -13,7 +13,7 @@ network LOCALE extends BaseNetwork
     submodules:
         node[numNodes]: WirelessNode {
             parameters:
-               
+                @display("ls=,0");
                 nicType = default("NicCSMA");
         }
 }

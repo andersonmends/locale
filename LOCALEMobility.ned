@@ -3,8 +3,8 @@ package locale;
 //importa inet.mobility.IMobility;
 import inet.mobility.models.MovingMobilityBase;
 
-// Implementação da algoritmo de localização por nós vizinhos, LOCALE.
-// NED que implementado o módulo de mobilidade do nó, necessitando de implementar a lógica do algoritmo
+// Implementação da algoritmo de localização através de mesclagem de posição dos vizinhos, LOCALE.
+// NED que implementado o módulo de mobilidade do nó, necessitando implementar a lógica do algoritmo
 // na classe C++ correspondete ao  módulo
 simple LOCALEMobility extends MovingMobilityBase
 {
@@ -19,5 +19,6 @@ simple LOCALEMobility extends MovingMobilityBase
         double precisao = default(0);
         bool initFromDisplayString = default(true);
         double velocidade @unit(mps) = default(0mps); 
+        @display("ls=,0");
         @class(LOCALEMobility); // define a classe que implementará a lógica do módulo
 }
