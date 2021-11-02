@@ -31,3 +31,16 @@ Update Phase: nessa fase é mesclado a estimativa dos vizinhos com sua confianç
 Para executar as simulações foram definidos alguns parâmetros semelhantes aos escolhidos no artigo do sistema. O tempo de simulação foi definido para 8m como no artigo, ou seja, 480s. A área, semelhantes ao primeiro experimento, foi definido um campo de 1KM x 1KM. Foram escolhidos dois experimentos base, execução com 10 nós e com 100 nós.
 Para o primeiro experimento foram geradas 174 amostras de estimativa de localização dos nós, delas foi extraída a melhor estimativa para cada nó e também a estimativa no final da execução, como pode ser observada na figura 01 e 02.
 
+![image](https://user-images.githubusercontent.com/10708492/139906462-7600af46-45aa-460a-8521-c0babebce87d.png)
+
+![image](https://user-images.githubusercontent.com/10708492/139906561-f08f79ec-2b8f-46f1-89f1-55786e32e0eb.png)
+
+Para o segundo experimento, com bem mais nós, a quantidade de amostras foram 1838 amostras, como na anterior foi extraída a melhor estimativa para cada nó, como pode ser observada na figura 02.
+
+![image](https://user-images.githubusercontent.com/10708492/139906619-e51aed4e-5160-48fa-8fc5-527d769f8204.png)
+
+
+Para 10 nós a melhor estimativa deixa a estimativa bem próximo da posição real, já a estimativa final alguns nós mais isolados dos vizinhos ficaram com a estimativa um pouco distante do real.
+Para 100 nós, tanto o ponto com a melhor estimativa quanto a final de comportaram de forma parecida, deixando a estimativa e real bem próximas. 
+Como pode-se observar, a implementação de LOCALE tem uma precisão muito boa para um sistema que praticamente cálculos na localização no lugar de sensores. Para redes mais densas com mais vizinhos, a estimativa de localização é mais precisa do que uma rede com menos vizinhos.
+
