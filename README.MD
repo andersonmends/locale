@@ -1,9 +1,6 @@
-<h3 align="center">Universidade Federal de Alagoas (UFAL) Instituto de Computação (IC) <br>
-Programa de Pós-graduação em Informática (PPGI)
- 
-Disciplina: Algoritmos Distribuídos
+<h3>Projeto executado na disciplina de Algoritmos Distribuídos, do Programa de Mestrado em Informática 
+da Universidade Federal de Alagoas (UFAL). Que trata da implementação do algoritmo de estimativa de localização de redes móveis esparsas LOCALE (Collaborative Localization Estimation for Sparse Mobile Sensor Networks) através do uso do OMNET++.
 
-Relatório Projeto Final </h3>
 
 <h3>1.	Introdução </h3>
 
